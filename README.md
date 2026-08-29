@@ -20,7 +20,12 @@ large sizes — fine for the header/favicon use they're in now, but worth swappi
 proper vector logo if one ever gets made. The color palette in `src/index.css` in both
 apps (`@theme { --color-brand: ... }`) was sampled from that same photo (raspberry-red
 icon/script, navy wordmark, sky-blue label background) — edit those five variables to
-retheme everything at once.
+retheme everything at once. `frontend/public/hero.jpg` is the same source photo,
+compressed, used on the landing page.
+
+The landing page's "What We Offer" copy (Solo Treats / Private Gatherings / Event
+Catering) is a first draft in `frontend/src/pages/Landing.jsx` — read it over and adjust
+the wording/pricing-tier framing to match what Take n Go actually wants to offer.
 
 ## Getting started
 
@@ -28,14 +33,15 @@ retheme everything at once.
 ```bash
 cd backend
 cp .env.example .env   # fill in MONGODB_URI, JWT_SECRET, Cloudinary keys
-npm run dev             # starts the API on http://localhost:5000
+npm run dev             # starts the API on http://localhost:5050
 npm run seed:admin -- owner@example.com somePassword123   # create the first admin login
 ```
+(Port 5050, not 5000 — macOS's AirPlay Receiver squats on 5000.)
 
 ### 2. Admin dashboard
 ```bash
 cd admin
-cp .env.example .env    # VITE_API_URL, defaults to http://localhost:5000/api
+cp .env.example .env    # VITE_API_URL, defaults to http://localhost:5050/api
 npm run dev              # http://localhost:5174 (or next free port)
 ```
 Log in with the admin account you seeded above. The dashboard has three tabs:
@@ -51,18 +57,29 @@ Products are modeled as one item with multiple **variants** (size + price + opti
 discount + stock), which is why "Take n Go" parfaits sold in several volumes are a
 single product with several price rows rather than separate products per size.
 
-### 3. Frontend (customer catalog)
+### 3. Frontend (customer-facing site)
 ```bash
 cd frontend
 cp .env.example .env    # VITE_API_URL + VITE_WHATSAPP_NUMBER (set the real WhatsApp number!)
 npm run dev              # http://localhost:5173
 ```
-Fetches live categories/products from the backend. Each product shows its available
-sizes as pills (out-of-stock sizes are struck through and unselectable) with the
-selected size's price — discounted price shown with the original struck through, if
-set. "Order via WhatsApp" logs an inquiry server-side for that size, then opens a
-wa.me link pre-filled with the product name, size, and price — no cart/checkout,
-matching the proposal's goal of keeping WhatsApp as the actual ordering channel.
+Two routes (via `react-router-dom`, client-side):
+- **`/`** — landing page: hero photo, trust badges pulled from the real label copy
+  (100% Preservatives Free / Cow Milk / Homemade / Natural Sweetener), and a "What We
+  Offer" section (Solo Treats, Private Gatherings, Event Catering) — each with its own
+  WhatsApp inquiry link so a customer can ask about catering without a specific product
+  in mind yet.
+- **`/menu`** — the product catalog. Fetches live categories/products from the backend.
+  Each product shows its available sizes as pills (out-of-stock sizes are struck through
+  and unselectable) with the selected size's price — discounted price shown with the
+  original struck through, if set. "Order via WhatsApp" logs an inquiry server-side for
+  that size, then opens a wa.me link pre-filled with the product name, size, and price —
+  no cart/checkout, matching the proposal's goal of keeping WhatsApp as the actual
+  ordering channel.
+
+Deploying `/menu` as a real URL (not just an in-app link) needs the host configured for
+SPA fallback — i.e. unknown paths serve `index.html` so React Router can take over.
+Vercel and Netlify do this automatically for a Vite app; nothing extra to configure.
 
 ## Notes
 - Frontend and admin are separate Vite apps so the admin bundle (and its auth-gated

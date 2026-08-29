@@ -6,3 +6,9 @@ export function buildWhatsAppOrderLink({ phoneNumber, productName, size, price }
   const encoded = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encoded}`;
 }
+
+// For landing-page CTAs that aren't tied to a specific product yet — e.g.
+// "ask about event catering" — just a pre-filled opening line.
+export function buildWhatsAppInquiryLink(phoneNumber, message) {
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+}
