@@ -70,7 +70,7 @@ function SquareImageUpload({ files, onChange, existingImages = [], max = 5 }) {
               addFiles(e.dataTransfer.files);
             }}
             className={`flex aspect-square w-24 flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed text-stone-400 transition ${
-              dragOver ? 'border-emerald-500 bg-emerald-50 text-emerald-600' : 'border-stone-300 hover:border-stone-400'
+              dragOver ? 'border-brand bg-brand-sky-light text-brand' : 'border-stone-300 hover:border-stone-400'
             }`}
           >
             <span className="text-2xl leading-none">+</span>

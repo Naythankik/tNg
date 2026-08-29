@@ -65,7 +65,7 @@ function ProductCard({ product }) {
                 !variant.inStock
                   ? 'bg-stone-50 text-stone-300 line-through'
                   : active
-                    ? 'bg-stone-900 text-white'
+                    ? 'bg-brand-navy text-white'
                     : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
               }`}
             >
@@ -99,7 +99,7 @@ function ProductCard({ product }) {
           type="button"
           onClick={handleOrderClick}
           disabled={ordering || !selectedVariant?.inStock}
-          className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:opacity-60"
+          className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-dark disabled:opacity-60"
         >
           {ordering ? 'Opening WhatsApp…' : 'Order via WhatsApp'}
         </button>
@@ -133,9 +133,14 @@ function App() {
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900">
       <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto max-w-5xl px-6 py-5">
-          <h1 className="text-2xl font-semibold tracking-tight">Take n Go Confectionery</h1>
-          <p className="text-sm text-stone-500">Browse the menu, order straight to WhatsApp.</p>
+        <div className="mx-auto flex max-w-5xl items-center gap-3 px-6 py-4">
+          <img src="/logo.png" alt="Take n Go Confectionery" className="h-12 w-auto rounded-md" />
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-brand-navy">
+              Take n Go Confectionery
+            </h1>
+            <p className="text-sm text-stone-500">Browse the menu, order straight to WhatsApp.</p>
+          </div>
         </div>
       </header>
 
@@ -147,7 +152,7 @@ function App() {
               onClick={() => setActiveCategory(null)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                 activeCategory === null
-                  ? 'bg-stone-900 text-white'
+                  ? 'bg-brand-navy text-white'
                   : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-100'
               }`}
             >
@@ -160,7 +165,7 @@ function App() {
                 onClick={() => setActiveCategory(cat._id)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                   activeCategory === cat._id
-                    ? 'bg-stone-900 text-white'
+                    ? 'bg-brand-navy text-white'
                     : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-100'
                 }`}
               >

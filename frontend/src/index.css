@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Take n Go Confectionery brand palette, drawn from the product label
+   (raspberry-red icon/script, navy wordmark, sky-blue label background). */
+@theme {
+  --color-brand: #b23a5c;
+  --color-brand-dark: #8c2c48;
+  --color-brand-navy: #1f3a5f;
+  --color-brand-sky: #4fa3d9;
+  --color-brand-sky-light: #eaf4fc;
+}
+
 body {
   margin: 0;
 }

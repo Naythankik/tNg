@@ -13,6 +13,15 @@ confectionery-mvp/
 Frontend and admin are wired to the backend API (auth, categories, products, image
 upload, WhatsApp inquiry logging) — not just static placeholders.
 
+## Branding
+`frontend/public/logo.png` and `admin/public/logo.png` are cropped from a real product
+photo (`take_n_go-330ml.jpeg`) rather than vector art, so they're a little soft at
+large sizes — fine for the header/favicon use they're in now, but worth swapping for a
+proper vector logo if one ever gets made. The color palette in `src/index.css` in both
+apps (`@theme { --color-brand: ... }`) was sampled from that same photo (raspberry-red
+icon/script, navy wordmark, sky-blue label background) — edit those five variables to
+retheme everything at once.
+
 ## Getting started
 
 ### 1. Backend

@@ -50,9 +50,14 @@ function Dashboard({ onLoggedOut }) {
     <div className="min-h-screen bg-stone-50 text-stone-900">
       <header className="border-b border-stone-200 bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Take n Go Confectionery</h1>
-            <p className="text-sm text-stone-500">Admin dashboard</p>
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="Take n Go Confectionery" className="h-11 w-auto rounded-md" />
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-brand-navy">
+                Take n Go Confectionery
+              </h1>
+              <p className="text-sm text-stone-500">Admin dashboard</p>
+            </div>
           </div>
           <button
             type="button"
@@ -70,7 +75,7 @@ function Dashboard({ onLoggedOut }) {
               onClick={() => goToTab(t.key)}
               className={`border-b-2 px-3 py-2 text-sm font-medium transition ${
                 tab === t.key
-                  ? 'border-emerald-600 text-emerald-700'
+                  ? 'border-brand text-brand'
                   : 'border-transparent text-stone-500 hover:text-stone-800'
               }`}
             >

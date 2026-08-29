@@ -29,7 +29,8 @@ function Login({ onLoggedIn }) {
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-xl border border-stone-200 bg-white p-6 shadow-sm"
       >
-        <h1 className="mb-1 text-xl font-semibold">Take n Go Confectionery</h1>
+        <img src="/logo.png" alt="Take n Go Confectionery" className="mb-3 h-14 w-auto rounded-md" />
+        <h1 className="mb-1 text-xl font-semibold text-brand-navy">Take n Go Confectionery</h1>
         <p className="mb-6 text-sm text-stone-500">Admin dashboard login</p>
 
         {error && (
@@ -45,7 +46,7 @@ function Login({ onLoggedIn }) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mb-4 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mb-4 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
           placeholder="owner@example.com"
         />
 
@@ -58,14 +59,14 @@ function Login({ onLoggedIn }) {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="mb-6 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="mb-6 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
           placeholder="••••••••"
         />
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:opacity-60"
+          className="w-full rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-dark disabled:opacity-60"
         >
           {submitting ? 'Signing in…' : 'Sign in'}
         </button>

@@ -67,13 +67,13 @@ function ProductForm({ product, categories, onSaved, onCancel }) {
             placeholder="Title (e.g. Vanilla Parfait)"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
           />
           <select
             required
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
           >
             <option value="">Select category…</option>
             {categories.map((cat) => (
@@ -89,7 +89,7 @@ function ProductForm({ product, categories, onSaved, onCancel }) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={2}
-          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
 
         <div>
@@ -115,7 +115,7 @@ function ProductForm({ product, categories, onSaved, onCancel }) {
           <button
             type="submit"
             disabled={submitting}
-            className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 disabled:opacity-60"
+            className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-white hover:bg-brand-dark disabled:opacity-60"
           >
             {submitting ? 'Saving…' : isEditing ? 'Save changes' : 'Add product'}
           </button>

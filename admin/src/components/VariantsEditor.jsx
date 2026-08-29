@@ -25,7 +25,7 @@ function VariantsEditor({ variants, onChange }) {
               placeholder="Volume (e.g. 250ml)"
               value={variant.label}
               onChange={(e) => updateVariant(i, { label: e.target.value })}
-              className="col-span-4 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-emerald-500 focus:outline-none"
+              className="col-span-4 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
             />
             <input
               required
@@ -34,7 +34,7 @@ function VariantsEditor({ variants, onChange }) {
               placeholder="Price (₦)"
               value={variant.price}
               onChange={(e) => updateVariant(i, { price: e.target.value })}
-              className="col-span-3 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-emerald-500 focus:outline-none"
+              className="col-span-3 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
             />
             <input
               type="number"
@@ -42,7 +42,7 @@ function VariantsEditor({ variants, onChange }) {
               placeholder="Discount ₦ (optional)"
               value={variant.discountPrice}
               onChange={(e) => updateVariant(i, { discountPrice: e.target.value })}
-              className="col-span-3 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-emerald-500 focus:outline-none"
+              className="col-span-3 rounded-lg border border-stone-300 px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
             />
             <label className="col-span-1 flex items-center justify-center gap-1 text-xs text-stone-500">
               <input

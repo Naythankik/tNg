@@ -52,11 +52,11 @@ function CategoriesPage() {
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
           placeholder="e.g. Parfaits"
-          className="flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none"
+          className="flex-1 rounded-lg border border-stone-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded-lg bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-800"
+          className="rounded-lg bg-brand-navy px-4 py-2 text-sm font-medium text-white hover:bg-brand"
         >
           Add
         </button>
