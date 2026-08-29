@@ -1,6 +1,6 @@
-# Confectionery MVP
+# Take n Go Confectionery — MVP
 
-E-commerce/catalog MVP for a confectionery business. See `confectionery_mvp_proposal.md`
+E-commerce/catalog MVP for Take n Go Confectionery. See `confectionery_mvp_proposal.md`
 (also in Downloads) for the full write-up. Three apps live side by side here:
 
 ```
@@ -10,9 +10,12 @@ confectionery-mvp/
 └── backend/    # REST API — Node/Express + MongoDB (Mongoose) + Cloudinary
 ```
 
+Frontend and admin are wired to the backend API (auth, categories, products, image
+upload, WhatsApp inquiry logging) — not just static placeholders.
+
 ## Getting started
 
-### Backend
+### 1. Backend
 ```bash
 cd backend
 cp .env.example .env   # fill in MONGODB_URI, JWT_SECRET, Cloudinary keys
@@ -20,25 +23,35 @@ npm run dev             # starts the API on http://localhost:5000
 npm run seed:admin -- owner@example.com somePassword123   # create the first admin login
 ```
 
-### Frontend (customer catalog)
-```bash
-cd frontend
-npm run dev             # http://localhost:5173
-```
-
-### Admin dashboard
+### 2. Admin dashboard
 ```bash
 cd admin
-npm run dev             # Vite will pick the next free port, e.g. http://localhost:5174
+cp .env.example .env    # VITE_API_URL, defaults to http://localhost:5000/api
+npm run dev              # http://localhost:5174 (or next free port)
 ```
+Log in with the admin account you seeded above. From the dashboard you can:
+- add/delete categories
+- add products (title, price, size, description, category, images) — images upload
+  straight to Cloudinary via the backend
+- toggle a product's in-stock status
+- delete products
+
+### 3. Frontend (customer catalog)
+```bash
+cd frontend
+cp .env.example .env    # VITE_API_URL + VITE_WHATSAPP_NUMBER (set the real WhatsApp number!)
+npm run dev              # http://localhost:5173
+```
+Fetches live categories/products from the backend. Each "Order via WhatsApp" click
+logs an inquiry server-side, then opens a wa.me link pre-filled with the product name,
+size, and price — no cart/checkout, matching the proposal's goal of keeping WhatsApp as
+the actual ordering channel.
 
 ## Notes
 - Frontend and admin are separate Vite apps so the admin bundle (and its auth-gated
   routes) never ships to public visitors.
-- The backend exposes `/api/products`, `/api/categories`, `/api/auth`, all documented
+- The backend exposes `/api/products`, `/api/categories`, `/api/auth`, documented
   inline in `backend/src/routes/`. Product/category writes require a JWT from
   `POST /api/auth/login`.
-- "Order via WhatsApp" is a client-side link builder (`frontend/src/utils/whatsapp.js`) —
-  no cart/checkout, matching the proposal's goal of keeping WhatsApp as the actual
-  ordering channel. Each click also logs an `OrderInquiry` server-side for conversion
-  tracking (`POST /api/products/:id/inquiries`).
+- Set `VITE_WHATSAPP_NUMBER` in `frontend/.env` to Take n Go Confectionery's real
+  WhatsApp number before going live — it currently falls back to a placeholder.
