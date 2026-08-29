@@ -91,7 +91,7 @@ function SquareImageUpload({ files, onChange, existingImages = [], max = 5 }) {
         }}
       />
       <p className="mt-2 text-xs text-stone-400">
-        Square photos work best. Up to {max} images — {slotsUsed}/{max} used.
+        Square photos work best. Up to {max} images. {slotsUsed}/{max} used.
       </p>
     </div>
   );

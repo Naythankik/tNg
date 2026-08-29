@@ -9,22 +9,22 @@ const OFFERINGS = [
     emoji: '🍨',
     title: 'Solo Treats',
     description:
-      "Individual parfait cups for whenever a craving hits — grab one for yourself, no order minimum, no waiting on a crowd.",
+      'Individual parfait cups for whenever a craving hits. Grab one for yourself, no order minimum, no waiting on a crowd.',
     message: "Hi, I'd like to order a parfait for myself.",
   },
   {
     emoji: '🎉',
     title: 'Private Gatherings',
     description:
-      'Birthdays, get-togethers, family celebrations — tell us the headcount and the vibe, and we\'ll put together a spread that fits.',
+      "Birthdays, get-togethers, family celebrations: tell us the headcount and the vibe, and we'll put together a spread that fits.",
     message: "Hi, I'm planning a private gathering and would like to know more about your packages.",
   },
   {
     emoji: '🥂',
     title: 'Event Catering',
     description:
-      'Weddings, corporate events, large parties — bulk parfait platters and custom packaging, made fresh for the date that matters.',
-    message: "Hi, I'm looking into catering for an upcoming event — could you tell me more?",
+      'Weddings, corporate events, large parties: bulk parfait platters and custom packaging, made fresh for the date that matters.',
+    message: "Hi, I'm looking into catering for an upcoming event. Could you tell me more?",
   },
 ];
 
@@ -58,7 +58,7 @@ function Landing() {
               Homemade fruit parfaits, made fresh for you
             </h1>
             <p className="mt-4 text-lg text-stone-600">
-              Take n Go Confectionery makes fruit parfaits by hand — whether it's one cup for
+              Take n Go Confectionery makes fruit parfaits by hand, whether it's one cup for
               yourself, a spread for a private gathering, or catering for your next event.
             </p>
             <TrustBadges className="mt-6" />
@@ -127,7 +127,7 @@ function Landing() {
       <section className="mx-auto max-w-5xl px-6 py-14 text-center">
         <h2 className="text-2xl font-semibold tracking-tight text-brand-navy">Your Yummy's Delight</h2>
         <p className="mx-auto mt-3 max-w-xl text-stone-600">
-          Every parfait is made fresh to order — no shortcuts, no preservatives. Ready to see
+          Every parfait is made fresh to order, no shortcuts, no preservatives. Ready to see
           what's on the menu today?
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">

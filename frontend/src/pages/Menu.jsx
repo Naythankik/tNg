@@ -71,7 +71,7 @@ function Menu() {
       )}
 
       {!loading && !error && products.length === 0 && (
-        <p className="text-stone-500">No items yet — check back soon!</p>
+        <p className="text-stone-500">No items yet. Check back soon!</p>
       )}
 
       {!loading && !error && products.length > 0 && (

@@ -55,7 +55,7 @@ function ProductsPage({ onEdit, refreshKey }) {
 
       {products.length === 0 ? (
         <p className="rounded-xl border border-stone-200 bg-white p-5 text-center text-stone-400">
-          No products yet — add one from the "Add Product" tab.
+          No products yet. Add one from the "Add Product" tab.
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
