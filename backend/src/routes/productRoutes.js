@@ -4,7 +4,7 @@ const {
   getProduct,
   createProduct,
   updateProduct,
-  toggleStock,
+  toggleVariantStock,
   deleteProduct,
   logOrderInquiry,
 } = require('../controllers/productController');
@@ -21,7 +21,7 @@ router.post('/:id/inquiries', logOrderInquiry);
 // Admin (protected)
 router.post('/', requireAuth, upload.array('images', 5), createProduct);
 router.patch('/:id', requireAuth, upload.array('images', 5), updateProduct);
-router.patch('/:id/toggle-stock', requireAuth, toggleStock);
+router.patch('/:id/variants/:variantId/toggle-stock', requireAuth, toggleVariantStock);
 router.delete('/:id', requireAuth, deleteProduct);
 
 module.exports = router;

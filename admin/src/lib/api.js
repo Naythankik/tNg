@@ -1,6 +1,6 @@
 import { getToken, clearToken } from './auth';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050/api';
 
 async function request(path, options = {}) {
   const token = getToken();
@@ -48,12 +48,20 @@ export function getProducts() {
   return request('/products');
 }
 
+export function getProduct(id) {
+  return request(`/products/${id}`);
+}
+
 export function createProduct(formData) {
   return request('/products', { method: 'POST', body: formData });
 }
 
-export function toggleProductStock(id) {
-  return request(`/products/${id}/toggle-stock`, { method: 'PATCH' });
+export function updateProduct(id, formData) {
+  return request(`/products/${id}`, { method: 'PATCH', body: formData });
+}
+
+export function toggleVariantStock(productId, variantId) {
+  return request(`/products/${productId}/variants/${variantId}/toggle-stock`, { method: 'PATCH' });
 }
 
 export function deleteProduct(id) {

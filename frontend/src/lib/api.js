@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050/api';
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE_URL}${path}`, {
@@ -26,6 +26,9 @@ export function getProducts({ category } = {}) {
   return request(`/products${qs ? `?${qs}` : ''}`);
 }
 
-export function logOrderInquiry(productId) {
-  return request(`/products/${productId}/inquiries`, { method: 'POST', body: JSON.stringify({}) });
+export function logOrderInquiry(productId, variantId) {
+  return request(`/products/${productId}/inquiries`, {
+    method: 'POST',
+    body: JSON.stringify({ variantId }),
+  });
 }

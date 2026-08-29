@@ -11,24 +11,31 @@ function formatNaira(amount) {
 }
 
 function ProductCard({ product }) {
+  const inStockVariants = product.variants.filter((v) => v.inStock);
+  const [selectedId, setSelectedId] = useState(inStockVariants[0]?._id ?? product.variants[0]?._id);
   const [ordering, setOrdering] = useState(false);
   const imageUrl = product.images?.[0]?.url;
 
+  const selectedVariant = product.variants.find((v) => v._id === selectedId);
+  const soldOut = inStockVariants.length === 0;
+
   async function handleOrderClick() {
+    if (!selectedVariant) return;
     setOrdering(true);
     try {
-      await logOrderInquiry(product._id);
+      await logOrderInquiry(product._id, selectedVariant._id);
     } catch {
       // Non-fatal — still let the customer through to WhatsApp even if logging fails.
     } finally {
       setOrdering(false);
     }
 
+    const effectivePrice = selectedVariant.discountPrice ?? selectedVariant.price;
     const link = buildWhatsAppOrderLink({
       phoneNumber: businessWhatsAppNumber,
       productName: product.title,
-      size: product.size,
-      price: formatNaira(product.price),
+      size: selectedVariant.label,
+      price: formatNaira(effectivePrice),
     });
     window.open(link, '_blank', 'noopener,noreferrer');
   }
@@ -44,22 +51,58 @@ function ProductCard({ product }) {
         {product.category?.name ?? 'Uncategorized'}
       </p>
       <h2 className="mt-1 text-lg font-semibold">{product.title}</h2>
-      {product.size && <p className="mt-1 text-sm text-stone-500">{product.size}</p>}
-      <p className="mt-2 text-lg font-semibold">{formatNaira(product.price)}</p>
 
-      {product.inStock ? (
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {product.variants.map((variant) => {
+          const active = variant._id === selectedId;
+          return (
+            <button
+              key={variant._id}
+              type="button"
+              disabled={!variant.inStock}
+              onClick={() => setSelectedId(variant._id)}
+              className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+                !variant.inStock
+                  ? 'bg-stone-50 text-stone-300 line-through'
+                  : active
+                    ? 'bg-stone-900 text-white'
+                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+              }`}
+            >
+              {variant.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedVariant && (
+        <p className="mt-2 text-lg font-semibold">
+          {selectedVariant.discountPrice ? (
+            <>
+              <span className="mr-2 text-base text-stone-400 line-through">
+                {formatNaira(selectedVariant.price)}
+              </span>
+              {formatNaira(selectedVariant.discountPrice)}
+            </>
+          ) : (
+            formatNaira(selectedVariant.price)
+          )}
+        </p>
+      )}
+
+      {soldOut ? (
+        <span className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-stone-100 px-4 py-2 text-sm font-medium text-stone-400">
+          Out of stock
+        </span>
+      ) : (
         <button
           type="button"
           onClick={handleOrderClick}
-          disabled={ordering}
+          disabled={ordering || !selectedVariant?.inStock}
           className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 disabled:opacity-60"
         >
           {ordering ? 'Opening WhatsApp…' : 'Order via WhatsApp'}
         </button>
-      ) : (
-        <span className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-stone-100 px-4 py-2 text-sm font-medium text-stone-400">
-          Out of stock
-        </span>
       )}
     </article>
   );
@@ -132,7 +175,7 @@ function App() {
         {!loading && error && (
           <p className="text-red-600">
             Couldn't load the menu ({error}). Is the backend running at{' '}
-            {import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}?
+            {import.meta.env.VITE_API_URL || 'http://localhost:5050/api'}?
           </p>
         )}
 
